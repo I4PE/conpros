@@ -14,7 +14,7 @@ class consultaController extends Controller
      */
     public function index()
     {    
-        return view('Welcome');    
+        return view('welcome');    
         // $data1=\DB::select("select pr.codigo, p.ci, p.ext, p.exp, 
         // (p.nombres || ' ' || p.paterno || ' ' || p.materno) AS nombre_completo,
         // e.cupo, e.estado, e.posicion 
