@@ -39,83 +39,88 @@ class consultaController extends Controller
             where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code
             and p.ci=$ci and pr.codigo=$prospecto");
 
-        $data2=\DB::select("select (case when pe.grupo = 'Grupo 1' and pe.pruebas = 'documento' then '11/11/2022'
-                                when pe.grupo = 'Grupo 1' and pe.pruebas = 'medico' then '15/11/2022'
-                                when pe.grupo = 'Grupo 1' and pe.pruebas = 'salto' then '16/11/2022'
-                                when pe.grupo = 'Grupo 1' and pe.pruebas = 'natacion' then '17/11/2022'
-                                when pe.grupo = 'Grupo 1' and pe.pruebas = 'fisico' then '16/11/2022'
-                                when pe.grupo = 'Grupo 1' and pe.pruebas = 'logico' then '18/11/2022'
-                                when pe.grupo = 'Grupo 1' and pe.pruebas = 'psicologico' then '20/11/2022'
-                                when pe.grupo = 'Grupo 1' and pe.pruebas = 'cupo' then '20/11/2022'
-                                when pe.grupo = 'Grupo 2' and pe.pruebas = 'documento' then '21/11/2022'
-                                when pe.grupo = 'Grupo 2' and pe.pruebas = 'medico' then '23/11/2022'
-                                when pe.grupo = 'Grupo 2' and pe.pruebas = 'salto' then '24/11/2022'
-                                when pe.grupo = 'Grupo 2' and pe.pruebas = 'natacion' then '25/11/2022'
-                                when pe.grupo = 'Grupo 2' and pe.pruebas = 'fisico' then '26/11/2022'
-                                when pe.grupo = 'Grupo 2' and pe.pruebas = 'logico' then '27/11/2022'
-                                when pe.grupo = 'Grupo 2' and pe.pruebas = 'psicologico' then '27/11/2022'
-                                when pe.grupo = 'Grupo 2' and pe.pruebas = 'cupo' then '27/11/2022'
-                                when pe.grupo = 'Grupo 3' and pe.pruebas = 'documento' then '28/11/2022'
-                                when pe.grupo = 'Grupo 3' and pe.pruebas = 'medico' then '30/11/2022'
-                                when pe.grupo = 'Grupo 3' and pe.pruebas = 'salto' then '01/12/2022'
-                                when pe.grupo = 'Grupo 3' and pe.pruebas = 'natacion' then '02/12/2022'
-                                when pe.grupo = 'Grupo 3' and pe.pruebas = 'fisico' then '03/12/2022'
-                                when pe.grupo = 'Grupo 3' and pe.pruebas = 'logico' then '04/12/2022'
-                                when pe.grupo = 'Grupo 3' and pe.pruebas = 'psicologico' then '04/12/2022'
-                                when pe.grupo = 'Grupo 3' and pe.pruebas = 'cupo' then '04/12/2022'
-                                end) as fecha,
-                            (case when pe.pruebas = 'documento' then 'Revision de documentos, Talla-Peso y Examenes Mwdicos (Laboratorio)'
-                                when pe.pruebas = 'medico' then 'Exámenes Médicos'
-                                when pe.pruebas = 'salto' then 'Salto Alto'
-                                when pe.pruebas = 'natacion' then 'Natación'
-                                when pe.pruebas = 'fisico' then 'Evaluación Física Sumativa'
-                                when pe.pruebas = 'logico' then 'Evaluación Intelectual Sumativa'
-                                when pe.pruebas = 'psicologico' then 'Evaluación Psicológica'
-                                when pe.pruebas = 'cupo' then 'Cupo'
-                                end) as evaluacion,
-                            (case when pe.pruebas = 'documento' and pe.evaluaciones = 0 then 'No Cumple'
-                                when pe.pruebas = 'documento' and pe.evaluaciones = 1 then 'Cumple'
-                                when pe.pruebas = 'documento' and pe.evaluaciones = 2 then 'Sin Calificar'
-                                when pe.pruebas = 'pesotalla' and pe.evaluaciones = -1 then 'Sin Calificar'
-                                when pe.pruebas = 'pesotalla' and pe.evaluaciones = 0 then 'No Existe'
-                                when pe.pruebas = 'pesotalla' and pe.evaluaciones = 1 then 'Desnutrición'
-                                when pe.pruebas = 'pesotalla' and pe.evaluaciones = 2 then 'Riesgo'
-                                when pe.pruebas = 'pesotalla' and pe.evaluaciones = 4 then 'Sobrepeso'
-                                when pe.pruebas = 'pesotalla' and pe.evaluaciones = 5 then 'Obesidad'
-                                when pe.pruebas = 'pesotalla' and pe.evaluaciones = 6 then 'Ideal'
-                                when pe.pruebas = 'pesotalla' and pe.evaluaciones = 7 then 'Error de Calculo'
-                                when pe.pruebas = 'medico' and pe.evaluaciones = 0 then 'No Apto'
-                                when pe.pruebas = 'medico' and pe.evaluaciones = 1 then 'Apto'
-                                when pe.pruebas = 'medico' and pe.evaluaciones = 2 then 'Sin Calificar'
-                                when pe.pruebas = 'salto' and pe.evaluaciones = 0 then 'Reprobó'
-                                when pe.pruebas = 'salto' and pe.evaluaciones = 1 then 'Aprobó'
-                                when pe.pruebas = 'salto' and pe.evaluaciones = 2 then 'Sin Calificar'
-                                when pe.pruebas = 'natacion' and pe.evaluaciones = 0 then 'No Aprobó'
-                                when pe.pruebas = 'natacion' and pe.evaluaciones = 1 then 'Aprobó'
-                                when pe.pruebas = 'natacion' and pe.evaluaciones = 2 then 'Sin Calificar'
-                                when pe.pruebas = 'fisico' and pe.evaluaciones = 8 then 'Sin Calificar'
-                                when pe.pruebas = 'logico' and pe.evaluaciones = 8 then 'Sin Calificar'
-                                when pe.pruebas = 'psicologico' and pe.evaluaciones = 0 then 'No Apto'
-                                when pe.pruebas = 'psicologico' and pe.evaluaciones = 1 then 'Apto'
-                                when pe.pruebas = 'psicologico' and pe.evaluaciones = 2 then 'Sin Calificar'
-                                when pe.pruebas = 'cupo' and pe.evaluaciones = 0 then 'Sin Cupo'
-                                when pe.pruebas = 'cupo' and pe.evaluaciones = 1 then 'Aprobado en Cupo'
-                                when pe.pruebas = 'cupo' and pe.evaluaciones = 2 then 'Sin Calificar'
-                            end) as atributo		
-                        from (
-                        select 
-                        (select gr.nombre
-                        from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g,grupo as gr
-                        where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code and gr.code=a.cd_grupo
-                        and p.ci=$ci and pr.codigo=$prospecto) as grupo,
-                        unnest(array['documento', 'medico', 'salto','natacion','fisico','logico','psicologico']) AS pruebas, 
-                        unnest(array[e.documento, e.medico, e.salto, e.natacion, e.fisico, e.logico, e.psicologico]) AS evaluaciones                                                       
-                        from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g
-                        where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code
-                        and p.ci=$ci and pr.codigo=$prospecto
-                        group by p.ci, e.documento, e.medico, e.salto, e.natacion, e.fisico, e.logico, e.psicologico
-                        order by e.documento, e.medico, e.salto, e.natacion, e.fisico, e.logico, e.psicologico
-                        ) as pe");
+        $data2=\DB::select("select pe1.fecha, 
+        pe1.evaluacion,
+        (case when pe1.atributo = 'No Cumple' then pe1.atributo || ', ' || pe1.detalle else  pe1.atributo end) as atributo
+        from (
+            select (case when pe.grupo = 'Grupo 1' and pe.pruebas = 'documento' then '11/11/2022'
+                when pe.grupo = 'Grupo 1' and pe.pruebas = 'medico' then '15/11/2022'
+                when pe.grupo = 'Grupo 1' and pe.pruebas = 'salto' then '16/11/2022'
+                when pe.grupo = 'Grupo 1' and pe.pruebas = 'natacion' then '17/11/2022'
+                when pe.grupo = 'Grupo 1' and pe.pruebas = 'fisico' then '16/11/2022'
+                when pe.grupo = 'Grupo 1' and pe.pruebas = 'logico' then '18/11/2022'
+                when pe.grupo = 'Grupo 1' and pe.pruebas = 'psicologico' then '20/11/2022'
+                when pe.grupo = 'Grupo 1' and pe.pruebas = 'cupo' then '20/11/2022'
+                when pe.grupo = 'Grupo 2' and pe.pruebas = 'documento' then '21/11/2022'
+                when pe.grupo = 'Grupo 2' and pe.pruebas = 'medico' then '23/11/2022'
+                when pe.grupo = 'Grupo 2' and pe.pruebas = 'salto' then '24/11/2022'
+                when pe.grupo = 'Grupo 2' and pe.pruebas = 'natacion' then '25/11/2022'
+                when pe.grupo = 'Grupo 2' and pe.pruebas = 'fisico' then '26/11/2022'
+                when pe.grupo = 'Grupo 2' and pe.pruebas = 'logico' then '27/11/2022'
+                when pe.grupo = 'Grupo 2' and pe.pruebas = 'psicologico' then '27/11/2022'
+                when pe.grupo = 'Grupo 2' and pe.pruebas = 'cupo' then '27/11/2022'
+                when pe.grupo = 'Grupo 3' and pe.pruebas = 'documento' then '28/11/2022'
+                when pe.grupo = 'Grupo 3' and pe.pruebas = 'medico' then '30/11/2022'
+                when pe.grupo = 'Grupo 3' and pe.pruebas = 'salto' then '01/12/2022'
+                when pe.grupo = 'Grupo 3' and pe.pruebas = 'natacion' then '02/12/2022'
+                when pe.grupo = 'Grupo 3' and pe.pruebas = 'fisico' then '03/12/2022'
+                when pe.grupo = 'Grupo 3' and pe.pruebas = 'logico' then '04/12/2022'
+                when pe.grupo = 'Grupo 3' and pe.pruebas = 'psicologico' then '04/12/2022'
+                when pe.grupo = 'Grupo 3' and pe.pruebas = 'cupo' then '04/12/2022'
+                end) as fecha,
+            (case when pe.pruebas = 'documento' then 'Revisión de Documentos, Talla-Peso y Examenes Médicos (Laboratorio)'
+                when pe.pruebas = 'medico' then 'Exámenes Médicos'
+                when pe.pruebas = 'salto' then 'Salto Alto'
+                when pe.pruebas = 'natacion' then 'Natación'
+                when pe.pruebas = 'fisico' then 'Evaluación Física Sumativa'
+                when pe.pruebas = 'logico' then 'Evaluación Intelectual Sumativa'
+                when pe.pruebas = 'psicologico' then 'Evaluación Psicológica'
+                when pe.pruebas = 'cupo' then 'Cupo'
+                end) as evaluacion,
+            (case when pe.pruebas = 'documento' and pe.evaluaciones = 0 then 'No Cumple'
+                when pe.pruebas = 'documento' and pe.evaluaciones = 1 then 'Cumple'
+                when pe.pruebas = 'documento' and pe.evaluaciones = 2 then 'Sin Calificar'
+                when pe.pruebas = 'pesotalla' and pe.evaluaciones = -1 then 'Sin Calificar'
+                when pe.pruebas = 'pesotalla' and pe.evaluaciones = 0 then 'No Existe'
+                when pe.pruebas = 'pesotalla' and pe.evaluaciones = 1 then 'Desnutrición'
+                when pe.pruebas = 'pesotalla' and pe.evaluaciones = 2 then 'Riesgo'
+                when pe.pruebas = 'pesotalla' and pe.evaluaciones = 4 then 'Sobrepeso'
+                when pe.pruebas = 'pesotalla' and pe.evaluaciones = 5 then 'Obesidad'
+                when pe.pruebas = 'pesotalla' and pe.evaluaciones = 6 then 'Ideal'
+                when pe.pruebas = 'pesotalla' and pe.evaluaciones = 7 then 'Error de Calculo'
+                when pe.pruebas = 'medico' and pe.evaluaciones = 0 then 'No Apto'
+                when pe.pruebas = 'medico' and pe.evaluaciones = 1 then 'Apto'
+                when pe.pruebas = 'medico' and pe.evaluaciones = 2 then 'Sin Calificar'
+                when pe.pruebas = 'salto' and pe.evaluaciones = 0 then 'Reprobó'
+                when pe.pruebas = 'salto' and pe.evaluaciones = 1 then 'Aprobó'
+                when pe.pruebas = 'salto' and pe.evaluaciones = 2 then 'Sin Calificar'
+                when pe.pruebas = 'natacion' and pe.evaluaciones = 0 then 'No Aprobó'
+                when pe.pruebas = 'natacion' and pe.evaluaciones = 1 then 'Aprobó'
+                when pe.pruebas = 'natacion' and pe.evaluaciones = 2 then 'Sin Calificar'
+                when pe.pruebas = 'fisico' and pe.evaluaciones = 8 then 'Sin Calificar'
+                when pe.pruebas = 'logico' and pe.evaluaciones = 8 then 'Sin Calificar'
+                when pe.pruebas = 'psicologico' and pe.evaluaciones = 0 then 'No Apto'
+                when pe.pruebas = 'psicologico' and pe.evaluaciones = 1 then 'Apto'
+                when pe.pruebas = 'psicologico' and pe.evaluaciones = 2 then 'Sin Calificar'
+                when pe.pruebas = 'cupo' and pe.evaluaciones = 0 then 'Sin Cupo'
+                when pe.pruebas = 'cupo' and pe.evaluaciones = 1 then 'Aprobado en Cupo'
+                when pe.pruebas = 'cupo' and pe.evaluaciones = 2 then 'Sin Calificar'
+                    end) as atributo, pe.detalle		
+            from (
+                select 
+                (select gr.nombre
+                from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g,grupo as gr
+                where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code and gr.code=a.cd_grupo
+                and p.ci=$ci and pr.codigo=$prospecto) as grupo, e.detalle, 
+                unnest(array['documento', 'medico', 'salto','natacion','fisico','logico','psicologico']) AS pruebas, 
+                unnest(array[e.documento, e.medico, e.salto, e.natacion, e.fisico, e.logico, e.psicologico]) AS evaluaciones                                                       
+                from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g
+                where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code
+                and p.ci=$ci and pr.codigo=$prospecto
+                group by p.ci, e.documento, e.medico, e.salto, e.natacion, e.fisico, e.logico, e.psicologico, e.detalle
+                order by e.documento, e.medico, e.salto, e.natacion, e.fisico, e.logico, e.psicologico
+            ) as pe
+        ) as pe1");
             
         //return view('Welcome', compact('data1', 'data2'),compact('imprimo'));       
         return view('resultado', compact('data1', 'data2'));

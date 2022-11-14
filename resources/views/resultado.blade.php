@@ -117,7 +117,7 @@
                             </div>
                             <div class="card text-black bg-transparent bg-success mb-3" style="max-width: 30rem;">
                                 <div  class="card-header">
-                                    <p class="card-text"><b>Nota 1.-</b> Los atributos CUMPLE, APTO ó APROBÓ lo habilitan para que usted pueda presentarse al dia siguiente, día a día has llegar a la Evaluación Psicológica. Si el atributo obtenido fuera NO CUMPLE, NO APTO ó NO APROBADO, significa que queda inhabilitado para la evaluación del día siguiente. <br>
+                                    <p class="card-text"><b>Nota 1.-</b> Los atributos CUMPLE, APTO ó APROBÓ lo habilitan para que usted pueda presentarse al dia siguiente, día a día hasta llegar a la Evaluación Psicológica. Si el atributo obtenido fuera NO CUMPLE, NO APTO ó NO APROBADO, significa que queda inhabilitado para la evaluación del día siguiente. <br>
                                         <b>Nota 2.-</b> CONSULTAS O DUDAS SOBRE RESULTADOS OBTENIDOS SE PODRÁN REALIZAR DEL 19 AL 22 DE DICIEMBRE DE 2022 (Prospecto - Pag.27 Transparencia).
                                     </p>
                                 </div>
