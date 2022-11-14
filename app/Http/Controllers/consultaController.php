@@ -7,63 +7,9 @@ use Illuminate\Http\Request;
 use App;
 class consultaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {    
-        return view('welcome');    
-        // $data1=\DB::select("select pr.codigo, p.ci, p.ext, p.exp, 
-        // (p.nombres || ' ' || p.paterno || ' ' || p.materno) AS nombre_completo,
-        // e.cupo, e.estado, e.posicion 
-        // from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g
-        // where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code
-        // and p.ci=9414436 and pr.codigo=143");
-
-        // (array)$data2=\DB::select("select 	pruebas as evaluacion,
-        //                             (case when pe.pruebas = 'documento' and pe.evaluaciones = 0 then 'No Cumple'
-        //                                 when pe.pruebas = 'documento' and pe.evaluaciones = 1 then 'Cumple'
-        //                                 when pe.pruebas = 'documento' and pe.evaluaciones = 2 then 'Sin Calificar'
-        //                                 when pe.pruebas = 'pesotalla' and pe.evaluaciones = -1 then 'Sin Calificar'
-        //                                 when pe.pruebas = 'pesotalla' and pe.evaluaciones = 0 then 'No Existe'
-        //                                 when pe.pruebas = 'pesotalla' and pe.evaluaciones = 1 then 'Desnutrición'
-        //                                 when pe.pruebas = 'pesotalla' and pe.evaluaciones = 2 then 'Riesgo'
-        //                                 when pe.pruebas = 'pesotalla' and pe.evaluaciones = 3 then 'Normal'
-        //                                 when pe.pruebas = 'pesotalla' and pe.evaluaciones = 4 then 'Sobrepeso'
-        //                                 when pe.pruebas = 'pesotalla' and pe.evaluaciones = 5 then 'Obesidad'
-        //                                 when pe.pruebas = 'pesotalla' and pe.evaluaciones = 6 then 'Ideal'
-        //                                 when pe.pruebas = 'pesotalla' and pe.evaluaciones = 7 then 'Error de Calculo'
-        //                                 when pe.pruebas = 'medico' and pe.evaluaciones = 0 then 'No Apto'
-        //                                 when pe.pruebas = 'medico' and pe.evaluaciones = 1 then 'Apto'
-        //                                 when pe.pruebas = 'medico' and pe.evaluaciones = 2 then 'Sin Calificar'
-        //                                 when pe.pruebas = 'salto' and pe.evaluaciones = 0 then 'Reprobó'
-        //                                 when pe.pruebas = 'salto' and pe.evaluaciones = 1 then 'Aprobó'
-        //                                 when pe.pruebas = 'salto' and pe.evaluaciones = 2 then 'Sin Calificar'
-        //                                 when pe.pruebas = 'natacion' and pe.evaluaciones = 0 then 'No Aprobó'
-        //                                 when pe.pruebas = 'natacion' and pe.evaluaciones = 1 then 'Aprobó'
-        //                                 when pe.pruebas = 'natacion' and pe.evaluaciones = 2 then 'Sin Calificar'
-        //                                 when pe.pruebas = 'fisico' and pe.evaluaciones = 8 then 'Sin Calificar'
-        //                                 when pe.pruebas = 'logico' and pe.evaluaciones = 8 then 'Sin Calificar'
-        //                                 when pe.pruebas = 'psicologico' and pe.evaluaciones = 0 then 'No Apto'
-        //                                 when pe.pruebas = 'psicologico' and pe.evaluaciones = 1 then 'Apto'
-        //                                 when pe.pruebas = 'psicologico' and pe.evaluaciones = 2 then 'Sin Calificar'
-        //                                 when pe.pruebas = 'cupo' and pe.evaluaciones = 0 then 'Sin Cupo'
-        //                                 when pe.pruebas = 'cupo' and pe.evaluaciones = 1 then 'Aprobado en Cupo'
-        //                                 when pe.pruebas = 'cupo' and pe.evaluaciones = 2 then 'Sin Calificar'
-        //                             end) as atributo		
-        //                     from (
-        //                         select unnest(array['documento', 'pesotalla', 'medico', 'salto','natacion','fisico','logico','psicologico']) AS pruebas, 
-        //                         unnest(array[e.documento, e.pesotalla, e.medico, e.salto, e.natacion, e.fisico, e.logico, e.psicologico]) AS evaluaciones                                                       
-        //                         from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g
-        //                         where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code
-        //                         and p.ci=9414436 and pr.codigo=143
-        //                         group by p.ci, e.documento, e.pesotalla, e.medico, e.salto, e.natacion, e.fisico, e.logico, e.psicologico
-        //                         order by e.documento, e.pesotalla, e.medico, e.salto, e.natacion, e.fisico, e.logico, e.psicologico
-        //                     ) as pe");
-        //                     //echo ($data2);
-        //     return view('Welcome', compact('data1', 'data2'));     
+        return view('welcome');
     }
 
     public function consulta(Request $request)
@@ -123,8 +69,8 @@ class consultaController extends Controller
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'cupo' then '04/12/2022'
                                         end) as fecha,
                                     (case when pe.pruebas = 'documento' then 'Revisión de Documentos'
-                                        when pe.pruebas = 'pesotalla' then 'Peso/Estatura'
-                                        when pe.pruebas = 'medico' then 'Examen Médico'
+                                        when pe.pruebas = 'pesotalla' then 'Talla-Peso'
+                                        when pe.pruebas = 'medico' then 'Presentación de Exámenes Médicos (Laboratorio)'
                                         when pe.pruebas = 'salto' then 'Salto Alto'
                                         when pe.pruebas = 'natacion' then 'Natación'
                                         when pe.pruebas = 'fisico' then 'Evaluación Física Sumativa'
