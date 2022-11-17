@@ -45,8 +45,9 @@ class consultaController extends Controller
                                             pe1.atributo = 'No Cumple' then pe1.atributo || ', ' || pe1.detalle  
                                     when pe1.evaluacion = 'Salto Alto' and pe1.atributo = 'Reprobó' then pe1.atributo || ', ' || pe1.detalle
                                     when pe1.evaluacion = 'Natación' and pe1.atributo = 'Reprobó' then pe1.atributo || ', ' || pe1.detalle 
-                                    when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo = 'Sin Calificar' then 'Aprobó'
+                                    when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo = 'Sin Calificar' then 'Sin Calificar'
                                     when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo::float > 50 then 'Aprobó'
+                                    when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo::float <= 50 then 'Reprobó'
                                     else  pe1.atributo end) as atributo
                                 from (
                                     select (case when pe.grupo = 'Grupo 1' and pe.pruebas = 'documento' then '12/11/2022'
