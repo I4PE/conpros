@@ -52,9 +52,9 @@
                                     <div class=" text-sm">
                                         <span> CONSULTE LOS RESULTADOS OBTENIDOS</span> <br><br>
                                         <label for="ci">INGRESE SU NÚMERO DE C.I.:</label>
-                                        <input placeholder="(Coloque su CI. Sin lugar de Expedición)" type="text" name="ci" class="form-control" id="ci" aria-describedby="basic-addon3"> <br>
+                                        <input required placeholder="(Coloque su CI. Sin lugar de Expedición)" type="text" name="ci" class="form-control" id="ci" aria-describedby="basic-addon3"> <br>
                                         <label for="prospecto">INGRESE NÚMERO DE PROSPECTO:</label>
-                                        <input placeholder="NÚMERO DE PROSPECTO" type="text" class="form-control" name="prospecto" id="prospecto" aria-describedby="basic-addon3"> <br>
+                                        <input required placeholder="NÚMERO DE PROSPECTO" type="text" class="form-control" name="prospecto" id="prospecto" aria-describedby="basic-addon3"> <br>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Consultar</button>
                                 </form>
