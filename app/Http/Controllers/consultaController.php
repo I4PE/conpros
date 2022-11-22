@@ -41,7 +41,7 @@ class consultaController extends Controller
 
         $data2=\DB::select("select pe1.fecha, 
                                 pe1.evaluacion,
-                                (case when pe1.evaluacion = 'Revisión de Documentos, Talla-Peso y Examenes Médicos (Laboratorio)' and
+                                (case when pe1.evaluacion = 'Revisión de Documentos' and
                                         pe1.atributo = 'No Cumple' then pe1.atributo || ', ' || pe1.detalle
                                 when pe1.evaluacion = 'Exámenes Médicos' and pe1.atributo = 'No Apto' then pe1.atributo || ', ' || pe1.detalle
                                 when pe1.evaluacion = 'Salto Alto' and pe1.atributo = 'Reprobó' then pe1.atributo || ', ' || pe1.detalle
@@ -76,7 +76,7 @@ class consultaController extends Controller
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'psicologico' then '04/12/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'cupo' then '04/12/2022'
                                         end) as fecha,
-                                    (case when pe.pruebas = 'documento' then 'Revisión de Documentos, Talla-Peso y Examenes Médicos (Laboratorio)'
+                                    (case when pe.pruebas = 'documento' then 'Revisión de Documentos'
                                         when pe.pruebas = 'medico' then 'Exámenes Médicos'
                                         when pe.pruebas = 'salto' then 'Salto Alto'
                                         when pe.pruebas = 'natacion' then 'Natación'
