@@ -81,8 +81,8 @@
                                                                 Las evaluaciones de su grupo fueron completadas <br>
                                                                 A partir del <b>11/12/2022</b>. Podrá consultar si esta habilitado 
                                                                 para los cursos vestibulares gestión 2023 en: 
-                                                                <button type="submit" class="btn btn-warning  btn-sm">Detalle</button>
-                                                                {{-- <button type="submit" class="btn btn-warning  btn-sm" disabled>Detalle</button> --}}
+                                                                {{-- <button type="submit" class="btn btn-warning  btn-sm">Detalle</button> --}}
+                                                                <button type="submit" class="btn btn-warning  btn-sm" disabled>Detalle</button>
                                                             </td>
                                                         </tr>
                                                     </tfoot>                                                                                            
