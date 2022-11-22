@@ -107,7 +107,9 @@ class consultaController extends Controller
                                         when pe.pruebas = 'natacion' and pe.evaluaciones = 2 then 'Sin Calificar'
                                         when pe.pruebas = 'fisico' and pe.evaluaciones = -1 then 'Sin Calificar'
                                         when pe.pruebas = 'fisico' and pe.evaluaciones > 0 then (pe.evaluaciones::float)::varchar
-                                        when pe.pruebas = 'logico' and pe.evaluaciones = 8 then 'Sin Calificar'
+                                        when pe.pruebas = 'logico' and pe.evaluaciones = -1 then 'Sin Calificar'
+                                        when pe.pruebas = 'logico' and pe.evaluaciones >= 51 then 'Aprobó'
+                                        when pe.pruebas = 'logico' and pe.evaluaciones < 51 then 'Reprobó'
                                         when pe.pruebas = 'psicologico' and pe.evaluaciones = 0 then 'No Apto'
                                         when pe.pruebas = 'psicologico' and pe.evaluaciones = 1 then 'Apto'
                                         when pe.pruebas = 'psicologico' and pe.evaluaciones = 2 then 'Sin Calificar'
