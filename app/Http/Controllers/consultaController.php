@@ -53,7 +53,7 @@ class consultaController extends Controller
                             when pe1.evaluacion = 'Natación' and pe1.atributo = 'No Aprobó' then pe1.atributo 
                             when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo = 'Sin Calificar' then 'Sin Calificar'
                             when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo::float > 50 then 'Aprobó'
-                            when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo::float <= 50 then 'Reprobó'
+                            when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo::float <= 50 and pe1.atributo::float <> 1.7500 then 'Reprobó'
                             when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo::float = 1.7500 then 'Habilitado'
                             else  pe1.atributo end) as atributo, pe1.detalles
                             from (
