@@ -60,6 +60,7 @@
                                                         <th scope="col">Fecha</th>
                                                         <th scope="col">Evaluación</th>
                                                         <th scope="col">Atributo</th>
+                                                        <th scope="col">Detalle</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -68,6 +69,7 @@
                                                             <td>{{ $data2->fecha }} </td>
                                                             <td><span>{{ $data2->evaluacion }}</span></td>
                                                             <td>{{ $data2->atributo }}</td>
+                                                            <td>{{ $data2->detalles }}</td>
                                                         </tr>
                                                         <tr>
                                                         </tr>
