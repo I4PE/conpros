@@ -137,7 +137,7 @@ class consultaController extends Controller
                                     and p.ci=$ci and pr.codigo=$prospecto) as grupo, e.detalle, e.ddocumento, 
                                     unnest(array['documento', 'pesotalla', 'medico', 'salto','natacion','fisico','logico','psicologico']) AS pruebas, 
                                     unnest(array[e.documento,  e.pesotalla, e.medico, e.salto, e.natacion, e.fisico, e.logico, e.psicologico]) AS evaluaciones,
-                                    unnest(array[e.ddocumento::varchar, e.dpesotalla::varchar, e.dmedico::varchar, e.dsalto::varchar, e.dnatacion::varchar, e.dfisico::varchar,'n/a',e.dpsicologico::varchar]) AS detalles
+                                    unnest(array[e.ddocumento::varchar, e.dpesotalla::varchar, e.dmedico::varchar, e.dsalto::varchar, e.dnatacion::varchar, e.dfisico::varchar, e.dintelectual::varchar,e.dpsicologico::varchar]) AS detalles
                                     from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g
                                     where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code
                                     and p.ci=$ci and pr.codigo=$prospecto
