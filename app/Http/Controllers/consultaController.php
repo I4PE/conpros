@@ -52,37 +52,33 @@ class consultaController extends Controller
                                 when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo = 'Sin Calificar' then ''
                                 when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo::float > 50 then 'Aprobó'
                                 when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo::float <= 50 and pe1.atributo::float <> 1.7500 then 'Reprobó'
-                                when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo::float = 1.7500 then 'Habilitado'
+                                when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo::float = 1.7500 then 'Habilitado'               			
                                 when pe1.evaluacion = 'Evaluación Intelectual Sumativa' and pe1.atributo = 'Sin Calificar' then ''
-                                when pe1.evaluacion = 'Evaluación Psicológica' and pe1.atributo = 'Sin Calificar' then ''
+                                when pe1.evaluacion = 'Evaluación Intelectual Sumativa' and pe1.atributo::float > 50 then 'Aprobó'
+                                when pe1.evaluacion = 'Evaluación Intelectual Sumativa' and pe1.atributo::float <= 50 and pe1.atributo::float <> 1.7500 then 'Reprobó'
+                                when pe1.evaluacion = 'Evaluación Intelectual Sumativa' and pe1.atributo::float = 1.7500 then 'Habilitado'                  			                  			
                                 else  pe1.atributo end) as atributo, pe1.detalles
                                 from (
                                     select (case when pe.grupo = 'Grupo 1' and pe.pruebas = 'documento' then '12/11/2022'
-                                        when pe.grupo = 'Grupo 1' and pe.pruebas = 'pesotalla' then '12/11/2022'
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'medico' then '14/11/2022'
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'salto' then '15/11/2022'
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'natacion' then '15/11/2022'
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'fisico' then '16/11/2022'
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'logico' then '18/11/2022'
-                                        when pe.grupo = 'Grupo 1' and pe.pruebas = 'psicologico' then '19/11/2022'
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'cupo' then '20/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'documento' then '21/11/2022'
-                                        when pe.grupo = 'Grupo 2' and pe.pruebas = 'pesotalla' then '21/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'medico' then '23/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'salto' then '24/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'natacion' then '25/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'fisico' then '26/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'logico' then '27/11/2022'
-                                        when pe.grupo = 'Grupo 2' and pe.pruebas = 'psicologico' then '27/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'cupo' then '27/11/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'documento' then '28/11/2022'
-                                        when pe.grupo = 'Grupo 3' and pe.pruebas = 'pesotalla' then '28/11/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'medico' then '30/11/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'salto' then '01/12/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'natacion' then '02/12/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'fisico' then '03/12/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'logico' then '04/12/2022'
-                                        when pe.grupo = 'Grupo 3' and pe.pruebas = 'psicologico' then '04/12/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'cupo' then '04/12/2022'
                                         end) as fecha,
                                     (case when pe.pruebas = 'documento' then 'Revisión de Documentos Administrativos y Exámenes Médicos (Laboratorios)'
@@ -91,7 +87,6 @@ class consultaController extends Controller
                                         when pe.pruebas = 'natacion' then 'Natación'
                                         when pe.pruebas = 'fisico' then 'Evaluación Física Sumativa'
                                         when pe.pruebas = 'logico' then 'Evaluación Intelectual Sumativa'
-                                        when pe.pruebas = 'psicologico' then 'Evaluación Psicológica'
                                         when pe.pruebas = 'cupo' then 'Cupo'
                                         end) as evaluacion,
                                     (case when pe.pruebas = 'documento' and pe.evaluaciones = 0 then 'No Cumple'
@@ -109,11 +104,7 @@ class consultaController extends Controller
                                         when pe.pruebas = 'fisico' and pe.evaluaciones = -1 then 'Sin Calificar'
                                         when pe.pruebas = 'fisico' and pe.evaluaciones > 0 then (pe.evaluaciones::float)::varchar
                                         when pe.pruebas = 'logico' and pe.evaluaciones = -1 then 'Sin Calificar'
-                                        when pe.pruebas = 'logico' and pe.evaluaciones >= 51 then 'Aprobó'
-                                        when pe.pruebas = 'logico' and pe.evaluaciones < 51 then 'Reprobó'
-                                        when pe.pruebas = 'psicologico' and pe.evaluaciones = 0 then 'No Apto'
-                                        when pe.pruebas = 'psicologico' and pe.evaluaciones = 1 then 'Apto'
-                                        when pe.pruebas = 'psicologico' and pe.evaluaciones = 2 then 'Sin Calificar'
+                                        when pe.pruebas = 'logico' and pe.evaluaciones > 0 then (pe.evaluaciones::float)::varchar
                                         when pe.pruebas = 'cupo' and pe.evaluaciones = 0 then 'Sin Cupo'
                                         when pe.pruebas = 'cupo' and pe.evaluaciones = 1 then 'Aprobado en Cupo'
                                         when pe.pruebas = 'cupo' and pe.evaluaciones = 2 then 'Sin Calificar'
@@ -124,9 +115,9 @@ class consultaController extends Controller
                                         from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g,grupo as gr
                                         where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code and gr.code=a.cd_grupo
                                         and p.ci=$ci and pr.codigo=$prospecto) as grupo, e.detalle, e.ddocumento, 
-                                        unnest(array['documento', 'medico', 'salto','natacion','fisico','logico','psicologico']) AS pruebas, 
-                                        unnest(array[e.documento, e.medico, e.salto, e.natacion, e.fisico, e.logico, e.psicologico]) AS evaluaciones,
-                                        unnest(array[e.ddocumento::varchar, e.dpesotalla::varchar, e.dmedico::varchar, e.dsalto::varchar, e.dnatacion::varchar, e.dfisico::varchar, e.dintelectual::varchar,e.dpsicologico::varchar]) AS detalles
+                                        unnest(array['documento', 'medico', 'salto','natacion','fisico','logico']) AS pruebas, 
+                                        unnest(array[e.documento, e.medico, e.salto, e.natacion, e.fisico, e.logico]) AS evaluaciones,
+                                        unnest(array[e.ddocumento::varchar, e.dmedico::varchar, e.dsalto::varchar, e.dnatacion::varchar, e.dfisico::varchar, e.dintelectual::varchar]) AS detalles
                                         from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g
                                         where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code
                                         and p.ci=$ci and pr.codigo=$prospecto
