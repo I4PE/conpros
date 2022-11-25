@@ -42,13 +42,19 @@ class consultaController extends Controller
         $data2=\DB::select("select pe1.fecha, 
                                 pe1.evaluacion,
                                 (case when pe1.evaluacion = 'Revisión de Documentos Administrativos y Exámenes Médicos (Laboratorios)' and pe1.atributo = 'No Cumple' then pe1.atributo
-                                when pe1.evaluacion = 'Exámenes Médicos' and pe1.atributo = 'No Apto' then pe1.atributo
+                                when pe1.evaluacion = 'Revisión de Documentos Administrativos y Exámenes Médicos (Laboratorios)' and pe1.atributo = 'Sin Calificar' then ''
                                 when pe1.evaluacion = 'Salto Alto' and pe1.atributo = 'Reprobó' then pe1.atributo
-                                when pe1.evaluacion = 'Natación' and pe1.atributo = 'No Aprobó' then pe1.atributo 
-                                when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo = 'Sin Calificar' then 'Sin Calificar'
+                                when pe1.evaluacion = 'Salto Alto' and pe1.atributo = 'Sin Calificar' then ''
+                                when pe1.evaluacion = 'Exámenes Médicos' and pe1.atributo = 'No Apto' then pe1.atributo
+                                when pe1.evaluacion = 'Exámenes Médicos' and pe1.atributo = 'Sin Calificar' then ''
+                                when pe1.evaluacion = 'Natación' and pe1.atributo = 'No Aprobó' then pe1.atributo
+                                when pe1.evaluacion = 'Natación' and pe1.atributo = 'Sin Calificar' then ''
+                                when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo = 'Sin Calificar' then ''
                                 when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo::float > 50 then 'Aprobó'
                                 when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo::float <= 50 and pe1.atributo::float <> 1.7500 then 'Reprobó'
                                 when pe1.evaluacion = 'Evaluación Física Sumativa' and pe1.atributo::float = 1.7500 then 'Habilitado'
+                                when pe1.evaluacion = 'Evaluación Intelectual Sumativa' and pe1.atributo = 'Sin Calificar' then ''
+                                when pe1.evaluacion = 'Evaluación Psicológica' and pe1.atributo = 'Sin Calificar' then ''
                                 else  pe1.atributo end) as atributo, pe1.detalles
                                 from (
                                     select (case when pe.grupo = 'Grupo 1' and pe.pruebas = 'documento' then '12/11/2022'
