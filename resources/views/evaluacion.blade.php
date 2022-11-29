@@ -138,22 +138,22 @@
                                                         <td>Nota Final (Eval.Sum.Fis. + Eval.Sum.Intel.) </td>
                                                         <td><span>   <?php echo $promedio_fisico_porcentaje + ($total_intelectual/5)/2 ?> </span></td>
                                                     </tr>
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <td>Orden de Mérito Obtenido </td>
                                                         <td><span> ---- </span></td>
-                                                    </tr>
-                                                    <tr>
+                                                    </tr> --}}
+                                                    {{-- <tr>
                                                         <td>Se encuentra dentro de los 450 postulantes habilitados para el curso vestibular de la gestion 2023 </td>
                                                         <td><span> ---- </span></td>
-                                                    </tr>                                                                                                                                                                 
+                                                    </tr>                                                                                                                                                                  --}}
                                                     <tr>
                                                     </tr>
                                                 </tbody>                                                                                           
                                             </table>                                            
 
-                                            <p class="card-text">
+                                            {{-- <p class="card-text">
                                                 <b>Nota.-</b> El efectivo de 450 postulantes se encuentra establecido por el Comando General del Ejército (Prospecto pag.29). <br>
-                                            </p>
+                                            </p> --}}
                                         </div>
                                         </div>
                                         <button type="button" class="btn btn-primary">Salir</button>
