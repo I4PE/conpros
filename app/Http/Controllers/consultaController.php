@@ -41,7 +41,18 @@ class consultaController extends Controller
 
         $data2=\DB::select("select pe1.fecha, 
                                 pe1.evaluacion,
-                                (case when pe1.evaluacion = 'Revisión de Documentos Administrativos y Exámenes Médicos (Laboratorios)' and pe1.atributo = 'No Cumple' then pe1.atributo
+                                (case 
+                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = -1 then 'Sin Calificar'
+                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 0 then 'No Existe'
+                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 1 then 'Desnutrición'
+                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 2 then 'Riesgo'
+                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 3 then 'Normal'
+                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 4 then 'Sobrepeso'
+                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 5 then 'Obesidad'
+                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 6 then 'Ideal'
+                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 7 then 'Error de Calculo'
+                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 8 then 'Sin Dato'
+                                when pe1.evaluacion = 'Revisión de Documentos Administrativos y Exámenes Médicos (Laboratorios)' and pe1.atributo = 'No Cumple' then pe1.atributo
                                 when pe1.evaluacion = 'Revisión de Documentos Administrativos y Exámenes Médicos (Laboratorios)' and pe1.atributo = 'Sin Calificar' then ''
                                 when pe1.evaluacion = 'Salto Alto' and pe1.atributo = 'Reprobó' then pe1.atributo
                                 when pe1.evaluacion = 'Salto Alto' and pe1.atributo = 'Sin Calificar' then ''
@@ -59,13 +70,17 @@ class consultaController extends Controller
                                 when pe1.evaluacion = 'Evaluación Intelectual Sumativa' and pe1.atributo::float = 1.7500 then 'Habilitado'                  			                  			
                                 else  pe1.atributo end) as atributo, pe1.detalles
                                 from (
-                                    select (case when pe.grupo = 'Grupo 1' and pe.pruebas = 'documento' then '12/11/2022'
+                                    select (
+                                    case
+                                        when pe.grupo = 'Grupo 1' and pe.pruebas = 'Peso/Talla' then '12/11/2022'
+                                        when pe.grupo = 'Grupo 1' and pe.pruebas = 'documento' then '12/11/2022'
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'medico' then '14/11/2022'
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'salto' then '15/11/2022'
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'natacion' then '15/11/2022'
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'fisico' then '16/11/2022'
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'logico' then '18/11/2022'
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'cupo' then '20/11/2022'
+                                        when pe.grupo = 'Grupo 2' and pe.pruebas = 'Peso/Talla' then '21/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'documento' then '21/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'medico' then '23/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'salto' then '24/11/2022'
@@ -73,6 +88,7 @@ class consultaController extends Controller
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'fisico' then '26/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'logico' then '27/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'cupo' then '27/11/2022'
+                                        when pe.grupo = 'Grupo 3' and pe.pruebas = 'Peso/Talla' then '28/11/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'documento' then '28/11/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'medico' then '30/11/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'salto' then '01/12/2022'
@@ -81,7 +97,8 @@ class consultaController extends Controller
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'logico' then '04/12/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'cupo' then '04/12/2022'
                                         end) as fecha,
-                                    (case when pe.pruebas = 'documento' then 'Revisión de Documentos Administrativos y Exámenes Médicos (Laboratorios)'
+                                    (case when pe.pruebas = 'Peso/Talla' then 'Peso/Talla'
+                                        when pe.pruebas = 'documento' then 'Revisión de Documentos Administrativos y Exámenes Médicos (Laboratorios)'
                                         when pe.pruebas = 'medico' then 'Exámenes Médicos'
                                         when pe.pruebas = 'salto' then 'Salto Alto'
                                         when pe.pruebas = 'natacion' then 'Natación'
@@ -89,7 +106,18 @@ class consultaController extends Controller
                                         when pe.pruebas = 'logico' then 'Evaluación Intelectual Sumativa'
                                         when pe.pruebas = 'cupo' then 'Cupo'
                                         end) as evaluacion,
-                                    (case when pe.pruebas = 'documento' and pe.evaluaciones = 0 then 'No Cumple'
+                                    (case 
+                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = -1 then 'Sin Calificar'
+                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 0 then 'No Existe'
+                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 1 then 'Desnutrición'
+                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 2 then 'Riesgo'
+                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 3 then 'Normal'
+                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 4 then 'Sobrepeso'
+                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 5 then 'Obesidad'
+                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 6 then 'Ideal'
+                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 7 then 'Error de Calculo'
+                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 8 then 'Sin Dato'                                    
+                                        when pe.pruebas = 'documento' and pe.evaluaciones = 0 then 'No Cumple'
                                         when pe.pruebas = 'documento' and pe.evaluaciones = 1 then 'Cumple'
                                         when pe.pruebas = 'documento' and pe.evaluaciones = 2 then 'Sin Calificar'
                                         when pe.pruebas = 'medico' and pe.evaluaciones = 0 then 'No Apto'
@@ -115,9 +143,9 @@ class consultaController extends Controller
                                         from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g,grupo as gr
                                         where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code and gr.code=a.cd_grupo
                                         and p.ci=$ci and pr.codigo=$prospecto) as grupo, e.detalle, e.ddocumento, 
-                                        unnest(array['documento', 'medico', 'salto','natacion','fisico','logico']) AS pruebas, 
-                                        unnest(array[e.documento, e.medico, e.salto, e.natacion, e.fisico, e.logico]) AS evaluaciones,
-                                        unnest(array[e.ddocumento::varchar, e.dmedico::varchar, e.dsalto::varchar, e.dnatacion::varchar, '', e.dintelectual::varchar]) AS detalles
+                                        unnest(array['Peso/Talla', 'documento', 'medico', 'salto','natacion','fisico','logico']) AS pruebas, 
+                                        unnest(array[e.pesotalla, e.documento, e.medico, e.salto, e.natacion, e.fisico, e.logico]) AS evaluaciones,
+                                        unnest(array[e.dpesotalla::varchar, e.ddocumento::varchar, e.dmedico::varchar, e.dsalto::varchar, e.dnatacion::varchar, '', e.dintelectual::varchar]) AS detalles
                                         from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g
                                         where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code
                                         and p.ci=$ci and pr.codigo=$prospecto
