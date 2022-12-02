@@ -135,7 +135,18 @@ class consultaController extends Controller
         $ci = $request->ci;
         $prospecto = $request->codigo; 
 
-        $data3=\DB::select("select (case when pe.sexo = 1 and pe.pruebas = 'Abdominales' and pe.evaluaciones > 45 then 'Aprobo'
+        $data3=\DB::select("select (case 
+                            when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = -1 then 'Sin Calificar'
+                            when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 0 then 'No Existe'
+                            when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 1 then 'Desnutrición'
+                            when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 2 then 'Riesgo'
+                            when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 3 then 'Normal'
+                            when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 4 then 'Sobrepeso'
+                            when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 5 then 'Obesidad'
+                            when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 6 then 'Ideal'
+                            when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 7 then 'Error de Calculo'
+                            when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 8 then 'Sin Dato'
+                            when pe.sexo = 1 and pe.pruebas = 'Abdominales' and pe.evaluaciones > 45 then 'Aprobo'
                             when pe.sexo = 0 and pe.pruebas = 'Abdominales' and pe.evaluaciones > 25 then 'Aprobo'
                             when pe.sexo = 1 and pe.pruebas = 'Flexiones de brazo' and pe.evaluaciones > 45 then 'Aprobo'
                             when pe.sexo = 0 and pe.pruebas = 'Flexiones de brazo' and pe.evaluaciones > 25 then 'Aprobo'
@@ -144,14 +155,17 @@ class consultaController extends Controller
                             when pe.sexo = 1 and  pe.pruebas = 'Velocidad (100 mts)' and pe.evaluaciones > 50  then 'Aprobo'
                             when pe.sexo = 1 and  pe.pruebas = 'Velocidad (100 mts)' and pe.evaluaciones > 50  then 'Aprobo'
                             else 'No Aprobo' end) as atributo,
-                        (case when pe.grupo = 'Grupo 1' and pe.pruebas = 'Abdominales' then '16/11/2022'
+                        (case when pe.grupo = 'Grupo 1' and pe.pruebas = 'Peso/Talla' then '12/11/2022'
+                            when pe.grupo = 'Grupo 1' and pe.pruebas = 'Abdominales' then '16/11/2022'
                             when pe.grupo = 'Grupo 1' and pe.pruebas = 'Flexiones de brazo'  then '16/11/2022'
                             when pe.grupo = 'Grupo 1' and pe.pruebas = 'Aeróbica (3200 mts)' then '17/11/2022'
                             when pe.grupo = 'Grupo 1' and pe.pruebas = 'Velocidad (100 mts)' then '17/11/2022'
+                            when pe.grupo = 'Grupo 2' and pe.pruebas = 'Peso/Talla' then '21/11/2022'
                             when pe.grupo = 'Grupo 2' and pe.pruebas = 'Abdominales' then '23/11/2022'
                             when pe.grupo = 'Grupo 2' and pe.pruebas = 'Flexiones de brazo'  then '23/11/2022'
                             when pe.grupo = 'Grupo 2' and pe.pruebas = 'Aeróbica (3200 mts)' then '24/11/2022'
-                            when pe.grupo = 'Grupo 2' and pe.pruebas = 'Velocidad (100 mts)' then '24/11/2022'	
+                            when pe.grupo = 'Grupo 2' and pe.pruebas = 'Velocidad (100 mts)' then '24/11/2022'
+                            when pe.grupo = 'Grupo 3' and pe.pruebas = 'Peso/Talla' then '28/11/2022'	
                             when pe.grupo = 'Grupo 3' and pe.pruebas = 'Abdominales' then '30/11/2022'
                             when pe.grupo = 'Grupo 3' and pe.pruebas = 'Flexiones de brazo'  then '30/11/2022'
                             when pe.grupo = 'Grupo 3' and pe.pruebas = 'Aeróbica (3200 mts)' then '01/12/2022'
@@ -162,9 +176,9 @@ class consultaController extends Controller
                                                 from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g,grupo as gr
                                                 where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code and gr.code=a.cd_grupo
                                                 and p.ci=$ci and pr.codigo=$prospecto) as grupo, p.sexo,
-                                                unnest(array['Abdominales', 'Flexiones de brazo', 'Aeróbica (3200 mts)', 'Velocidad (100 mts)']) as pruebas, 
-                                                unnest(array[e.abdominalnota, e.brazonota, e.aerobicanota, e.velocidadnota]) as evaluaciones,
-                                                unnest(array[CAST(e.abdominal AS varchar), CAST(e.brazo AS varchar),CAST(e.aerobica AS varchar),CAST(e.velocidad AS varchar)]) as cantidad
+                                                unnest(array['Peso/Talla', 'Abdominales', 'Flexiones de brazo', 'Aeróbica (3200 mts)', 'Velocidad (100 mts)']) as pruebas, 
+                                                unnest(array[e.pesotalla, e.abdominalnota, e.brazonota, e.aerobicanota, e.velocidadnota]) as evaluaciones,
+                                                unnest(array[e.dpesotalla::varchar, CAST(e.abdominal AS varchar), CAST(e.brazo AS varchar),CAST(e.aerobica AS varchar),CAST(e.velocidad AS varchar)]) as cantidad
                                         from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g,grupo as gr
                                         where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code and gr.code=a.cd_grupo
                                         and p.ci=$ci and pr.codigo=$prospecto
