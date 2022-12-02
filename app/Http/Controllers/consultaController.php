@@ -42,16 +42,6 @@ class consultaController extends Controller
         $data2=\DB::select("select pe1.fecha, 
                                 pe1.evaluacion,
                                 (case 
-                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = -1 then 'Sin Calificar'
-                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 0 then 'No Existe'
-                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 1 then 'Desnutrición'
-                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 2 then 'Riesgo'
-                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 3 then 'Normal'
-                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 4 then 'Sobrepeso'
-                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 5 then 'Obesidad'
-                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 6 then 'Ideal'
-                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 7 then 'Error de Calculo'
-                                when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 8 then 'Sin Dato'
                                 when pe1.evaluacion = 'Revisión de Documentos Administrativos y Exámenes Médicos (Laboratorios)' and pe1.atributo = 'No Cumple' then pe1.atributo
                                 when pe1.evaluacion = 'Revisión de Documentos Administrativos y Exámenes Médicos (Laboratorios)' and pe1.atributo = 'Sin Calificar' then ''
                                 when pe1.evaluacion = 'Salto Alto' and pe1.atributo = 'Reprobó' then pe1.atributo
