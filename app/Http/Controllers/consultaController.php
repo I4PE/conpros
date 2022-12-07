@@ -70,6 +70,7 @@ class consultaController extends Controller
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'fisico' then '16/11/2022'
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'logico' then '18/11/2022'
                                         when pe.grupo = 'Grupo 1' and pe.pruebas = 'cupo' then '20/11/2022'
+                                        when pe.grupo = 'Grupo 1' and pe.pruebas = 'Evaluación Psicológica' then '20/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'Peso/Talla' then '21/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'documento' then '21/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'medico' then '23/11/2022'
@@ -77,7 +78,8 @@ class consultaController extends Controller
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'natacion' then '25/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'fisico' then '26/11/2022'
                                         when pe.grupo = 'Grupo 2' and pe.pruebas = 'logico' then '27/11/2022'
-                                        when pe.grupo = 'Grupo 2' and pe.pruebas = 'cupo' then '27/11/2022'
+                                        when pe.grupo = 'Grupo 2' and pe.pruebas = 'cupo' then '27/11/2022' 
+                                        when pe.grupo = 'Grupo 2' and pe.pruebas = 'Evaluación Psicológica' then '27/11/2022'                                       
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'Peso/Talla' then '28/11/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'documento' then '28/11/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'medico' then '30/11/2022'
@@ -86,8 +88,10 @@ class consultaController extends Controller
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'fisico' then '03/12/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'logico' then '04/12/2022'
                                         when pe.grupo = 'Grupo 3' and pe.pruebas = 'cupo' then '04/12/2022'
+                                        when pe.grupo = 'Grupo 3' and pe.pruebas = 'Evaluación Psicológica' then '04/12/2022'
                                         end) as fecha,
-                                    (case when pe.pruebas = 'Peso/Talla' then 'Peso/Talla'
+                                    (case
+                                        when pe.pruebas = 'Peso/Talla' then 'Peso/Talla'
                                         when pe.pruebas = 'documento' then 'Revisión de Documentos Administrativos y Exámenes Médicos (Laboratorios)'
                                         when pe.pruebas = 'medico' then 'Exámenes Médicos'
                                         when pe.pruebas = 'salto' then 'Salto Alto'
@@ -95,8 +99,9 @@ class consultaController extends Controller
                                         when pe.pruebas = 'fisico' then 'Evaluación Física Sumativa'
                                         when pe.pruebas = 'logico' then 'Evaluación Intelectual Sumativa'
                                         when pe.pruebas = 'cupo' then 'Cupo'
+                                        when pe.pruebas = 'Evaluación Psicológica' then 'Evaluación Psicológica'
                                         end) as evaluacion,
-                                    (case 
+                                    (case
                                         when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = -1 then 'Sin Calificar'
                                         when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 0 then 'No Existe'
                                         when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 1 then 'Desnutrición'
@@ -126,6 +131,9 @@ class consultaController extends Controller
                                         when pe.pruebas = 'cupo' and pe.evaluaciones = 0 then 'Sin Cupo'
                                         when pe.pruebas = 'cupo' and pe.evaluaciones = 1 then 'Aprobado en Cupo'
                                         when pe.pruebas = 'cupo' and pe.evaluaciones = 2 then 'Sin Calificar'
+                                        when pe.pruebas = 'Evaluación Psicológica' and pe.evaluaciones = 0 then 'No Apto'
+                                    	when pe.pruebas = 'Evaluación Psicológica' and pe.evaluaciones = 1 then 'Apto'
+                                    	when pe.pruebas = 'Evaluación Psicológica' and pe.evaluaciones = 2 then 'Sin Calificar'                                         
                                             end) as atributo, pe.detalles		
                                     from (
                                         select 
@@ -133,9 +141,9 @@ class consultaController extends Controller
                                         from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g,grupo as gr
                                         where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code and gr.code=a.cd_grupo
                                         and p.ci=$ci and pr.codigo=$prospecto) as grupo, e.detalle, e.ddocumento, 
-                                        unnest(array['Peso/Talla', 'documento', 'medico', 'salto','natacion','fisico','logico']) AS pruebas, 
-                                        unnest(array[e.pesotalla, e.documento, e.medico, e.salto, e.natacion, e.fisico, e.logico]) AS evaluaciones,
-                                        unnest(array[e.dpesotalla::varchar, e.ddocumento::varchar, e.dmedico::varchar, e.dsalto::varchar, e.dnatacion::varchar, '', e.dintelectual::varchar]) AS detalles
+                                        unnest(array['Peso/Talla', 'documento', 'medico', 'salto','natacion','fisico','logico', 'Evaluación Psicológica']) AS pruebas, 
+                                        unnest(array[e.pesotalla, e.documento, e.medico, e.salto, e.natacion, e.fisico, e.logico, e.psicologico]) AS evaluaciones,
+                                        unnest(array[e.dpesotalla::varchar, e.ddocumento::varchar, e.dmedico::varchar, e.dsalto::varchar, e.dnatacion::varchar, '', e.dintelectual::varchar, e.dpsicologico]) AS detalles
                                         from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g
                                         where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code
                                         and p.ci=$ci and pr.codigo=$prospecto
