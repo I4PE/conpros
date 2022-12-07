@@ -136,7 +136,7 @@
                                                 @endforeach
                                                     <tr>
                                                         <td>Nota Final (Eval.Sum.Fis. + Eval.Sum.Intel.) </td>
-                                                        <td><span>   <?php echo $promedio_fisico_porcentaje + ($total_intelectual/5)/2 ?> </span></td>
+                                                        <td><span>   <?php echo number_format($promedio_fisico_porcentaje + number_format((float)($total_intelectual/5)/2,4),4) ?> </span></td>
                                                     </tr>
                                                     {{-- <tr>
                                                         <td>Orden de Mérito Obtenido </td>
