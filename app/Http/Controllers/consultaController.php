@@ -252,7 +252,7 @@ class consultaController extends Controller
             select unnest(array[e.abdominalnota, e.brazonota, e.aerobicanota, e.velocidadnota]) as evaluaciones
             from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g,grupo as gr
             where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code and gr.code=a.cd_grupo
-            and p.ci=9414436 and pr.codigo=143
+            and p.ci=$ci and pr.codigo=$prospecto
             ) as promedio");
         $promedio_fisico = (int) $data7[0]->promedio;
         $promedio_fisico_porcentaje = ($promedio_fisico/2);
