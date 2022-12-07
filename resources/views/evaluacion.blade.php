@@ -110,7 +110,7 @@
                                                         <td colspan=2>
                                                             Nota Evaluación Intelectual Sumativa (Equiv. al 50%) 
                                                         </td>
-                                                        <td colspan=2> <?php echo number_format(($total_intelectual/5)/2, 4) ?>  </td>
+                                                        <td colspan=2> <?php echo number_format((float)($total_intelectual)/2, 4) ?>  </td>
                                                     </tr>
                                                 </tbody>                                                                                           
                                             </table>
