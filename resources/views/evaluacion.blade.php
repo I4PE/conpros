@@ -104,13 +104,13 @@
                                                         <td colspan=2>
                                                             Nota Evaluación Intelectual Sumativa (sobre 100 Pts.)
                                                         </td>
-                                                        <td  colspan=2> <?php echo $total_intelectual/5 ?> </td>
+                                                        <td  colspan=2> <?php echo $total_intelectual ?> </td>
                                                     </tr>                                                    
                                                     <tr >
                                                         <td colspan=2>
                                                             Nota Evaluación Intelectual Sumativa (Equiv. al 50%) 
                                                         </td>
-                                                        <td colspan=2> <?php echo ($total_intelectual/5)/2 ?>  </td>
+                                                        <td colspan=2> <?php echo number_format(($total_intelectual/5)/2, 4) ?>  </td>
                                                     </tr>
                                                 </tbody>                                                                                           
                                             </table>
@@ -131,7 +131,7 @@
                                                 @foreach ($data6 as $data6)
                                                     <tr>
                                                         <td>Nota Evaluación Intelectual Sumativa </td>
-                                                        <td><span>  <?php echo ($total_intelectual/5)/2 ?>  </span></td>
+                                                        <td><span>  <?php echo number_format(((float)$total_intelectual/5)/2, 4) ?>  </span></td>
                                                     </tr>
                                                 @endforeach
                                                     <tr>

@@ -231,7 +231,7 @@ class consultaController extends Controller
                             where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code and gr.code=a.cd_grupo
                             and p.ci=$ci and pr.codigo=$prospecto
                         ) as pe");
-        $data5=\DB::select("select sum(pe.evaluaciones::integer) as total_fisico
+        $data5=\DB::select("select sum(pe.evaluaciones::float) as total_fisico
                             from 
                             (	select 
                                         unnest(array['Abdominales', 'Flexiones de brazo', 'Aeróbica (3200 mts)', 'Velocidad (100 mts)']) AS pruebas, 
@@ -241,7 +241,7 @@ class consultaController extends Controller
                                 and p.ci=$ci and pr.codigo=$prospecto
                             ) as pe");
         $total_fisico = $data5[0]->total_fisico;       
-        $data6=\DB::select("select sum(pe.evaluaciones::integer) as total_intelectual  
+        $data6=\DB::select("select sum(pe.evaluaciones::float) as total_intelectual  
             from 
             (	select 
                         unnest(array['Historia','Geografía','Lenguaje','Física','Matemáticas']) AS pruebas, 
@@ -252,18 +252,18 @@ class consultaController extends Controller
             ) as pe");
         
         
-        $total_intelectual = $data6[0]->total_intelectual;
-        $total_intelectual_promedio = ($data6[0]->total_intelectual/2);
+        $total_intelectual = number_format(((float)$data6[0]->total_intelectual)/5,4);
+        $total_intelectual_promedio = number_format(((float)$data6[0]->total_intelectual/2),4);
         $total_final = $total_fisico + $total_intelectual;
         // totales fisico
-        $data7=\DB::select("select (sum(promedio.evaluaciones)/4) promedio from (
+        $data7=\DB::select("select (sum(promedio.evaluaciones)::float/4)::float promedio from (
             select unnest(array[e.abdominalnota, e.brazonota, e.aerobicanota, e.velocidadnota]) as evaluaciones
             from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g,grupo as gr
             where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code and gr.code=a.cd_grupo
             and p.ci=$ci and pr.codigo=$prospecto
             ) as promedio");
-        $promedio_fisico = (int) $data7[0]->promedio;
-        $promedio_fisico_porcentaje = ($promedio_fisico/2);
+        $promedio_fisico = number_format((float)$data7[0]->promedio,4);
+        $promedio_fisico_porcentaje = number_format(((float)$data7[0]->promedio/2),4);
         // totales intelectual
         
 
