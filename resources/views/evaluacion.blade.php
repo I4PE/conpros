@@ -131,12 +131,12 @@
                                                 @foreach ($data6 as $data6)
                                                     <tr>
                                                         <td>Nota Evaluación Intelectual Sumativa </td>
-                                                        <td><span>  <?php echo number_format(((float)$total_intelectual/5)/2, 4) ?>  </span></td>
+                                                        <td><span>  <?php echo number_format(((float)$total_intelectual)/2, 4) ?>  </span></td>
                                                     </tr>
                                                 @endforeach
                                                     <tr>
                                                         <td>Nota Final (Eval.Sum.Fis. + Eval.Sum.Intel.) </td>
-                                                        <td><span>   <?php echo number_format($promedio_fisico_porcentaje + number_format((float)($total_intelectual/5)/2,4),4) ?> </span></td>
+                                                        <td><span>   <?php echo number_format($promedio_fisico_porcentaje + number_format((float)($total_intelectual)/2,4),4) ?> </span></td>
                                                     </tr>
                                                     {{-- <tr>
                                                         <td>Orden de Mérito Obtenido </td>
@@ -150,7 +150,9 @@
                                                     </tr>
                                                 </tbody>                                                                                           
                                             </table>                                            
-
+                                            <p class="card-text">
+                                                <b>Nota.-</b> SI LA NOTA FINAL ES MAYOR O IGUAL A 51,0000 PUNTOS, USTED APROBÓ, PERO ESTO NO IMPLICA QUE INGRESE AL CURSO VESTIBULAR - GESTIÓN 2023. <br>
+                                            </p>
                                             {{-- <p class="card-text">
                                                 <b>Nota.-</b> El efectivo de 450 postulantes se encuentra establecido por el Comando General del Ejército (Prospecto pag.29). <br>
                                             </p> --}}
