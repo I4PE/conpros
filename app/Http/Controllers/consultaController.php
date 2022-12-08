@@ -102,16 +102,7 @@ class consultaController extends Controller
                                         when pe.pruebas = 'Evaluación Psicológica' then 'Evaluación Psicológica'
                                         end) as evaluacion,
                                     (case
-                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = -1 then 'Sin Calificar'
-                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 0 then 'No Existe'
-                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 1 then 'Desnutrición'
-                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 2 then 'Riesgo'
-                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 3 then 'Normal'
-                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 4 then 'Sobrepeso'
-                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 5 then 'Obesidad'
-                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 6 then 'Ideal'
-                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 7 then 'Error de Calculo'
-                                        when pe.pruebas = 'Peso/Talla' and pe.evaluaciones = 8 then 'Sin Dato'                                    
+                                        when pe.pruebas = 'Peso/Talla' then 'Peso: ' || pe.peso || ' / ' ||'Talla: ' || pe.talla                                    
                                         when pe.pruebas = 'documento' and pe.evaluaciones = 0 then 'No Cumple'
                                         when pe.pruebas = 'documento' and pe.evaluaciones = 1 then 'Cumple'
                                         when pe.pruebas = 'documento' and pe.evaluaciones = 2 then 'Sin Calificar'
@@ -143,7 +134,8 @@ class consultaController extends Controller
                                         and p.ci=$ci and pr.codigo=$prospecto) as grupo, e.detalle, e.ddocumento, 
                                         unnest(array['Peso/Talla', 'documento', 'medico', 'salto','natacion','fisico','logico', 'Evaluación Psicológica']) AS pruebas, 
                                         unnest(array[e.pesotalla, e.documento, e.medico, e.salto, e.natacion, e.fisico, e.logico, e.psicologico]) AS evaluaciones,
-                                        unnest(array[e.dpesotalla::varchar, e.ddocumento::varchar, e.dmedico::varchar, e.dsalto::varchar, e.dnatacion::varchar, '', e.dintelectual::varchar, e.dpsicologico]) AS detalles
+                                        unnest(array['', e.ddocumento::varchar, e.dmedico::varchar, e.dsalto::varchar, e.dnatacion::varchar, '', e.dintelectual::varchar, e.dpsicologico]) AS detalles,
+                                        e.peso, e.talla
                                         from eval1 as e,aspirante as a,persona as p,prospecto as pr,gestion as g
                                         where e.cd_aspirante=a.code and a.cd_persona=p.code and a.cd_prospecto=pr.code and pr.cd_gestion=g.code
                                         and p.ci=$ci and pr.codigo=$prospecto
